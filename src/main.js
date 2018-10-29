@@ -50,6 +50,10 @@ var opts = require('commander')
     '-s, --silent',
     'Less verbose output'
   )
+  .option(
+    '-F, --https',
+    'Force HTTPS content responses'
+  )
   .version(
     packageJson.version,
     '-v, --version'
@@ -65,7 +69,8 @@ var startServer = function(configPath, config) {
     bind: opts.bind,
     port: opts.port,
     cors: opts.cors,
-    silent: opts.silent
+    silent: opts.silent,
+    https: opts.https
   });
 };
 

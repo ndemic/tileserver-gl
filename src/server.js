@@ -31,6 +31,12 @@ if (!isLight) {
 function start(opts) {
   console.log('Starting server');
 
+  if (opts.https) {
+    Object.defineProperty(express.request, 'protocol', {
+      get: function () { return 'https'; }
+    });
+  }
+
   var app = express().disable('x-powered-by'),
       serving = {
         styles: {},
@@ -295,7 +301,7 @@ function start(opts) {
               Math.floor(centerPx[0] / 256) + '/' +
               Math.floor(centerPx[1] / 256) + '.png';
         }
-        
+
         var tiles = utils.getTileUrls(
             req, style.serving_rendered.tiles,
             'styles/' + id, style.serving_rendered.format);
